@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REGISTRATION</title>
+    <style>
+        body {
+            background-image: url("https://images.hdqwalls.com/download/small-memory-lp-1920x1200.jpg");
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff;
+        }
+
+        .form {
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            padding: 30px;
+            width: 400px;
+            color: #fff;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #ddd;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: none;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="number"]:focus,
+        select:focus,
+        textarea:focus {
+            background: rgba(255, 255, 255, 0.3);
+            outline: none;
+            border: 1px solid #fff;
+        }
+
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        #for_gender {
+            margin-bottom: 20px;
+        }
+
+        .for_country {
+            margin-bottom: 20px;
+        }
+
+        #submit {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 50px;
+            background-color: #4CAF50;
+            color: #fff;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #submit:hover {
+            background-color: #45a049;
+        }
+
+        #for_check label {
+            display: inline;
+        }
+
+        #for_comments textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        textarea:focus {
+            background: rgba(255, 255, 255, 0.3);
+            outline: none;
+            border: 1px solid #fff;
+        }
+
+        select {
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        select option {
+            color: #000;
+        }
+
+        #display {
+            background-color: rgba(5, 5, 5, 0.8);
+            border-radius: 10px;
+            color: #f8f6f6;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="form">
+        <h1>Login</h1>
+        <form id="registrationForm">
+            <div id="for_name">
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" required placeholder="Enter your Name">
+            </div>
+
+            <div id="for_email">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" required placeholder="Enter your Email">
+            </div>
+
+            <div id="for_age">
+                <label for="age">Age</label>
+                <input type="number" name="age" id="age" required placeholder="Enter your Age">
+            </div>
+
+            <div id="for_gender">
+                <label for="gender">Gender</label>
+                <input type="radio" name="gender" value="male" id="male"> Male
+                <input type="radio" name="gender" value="female" id="female"> Female
+                <input type="radio" name="gender" value="others" id="others"> Others
+            </div>
+
+            <div class="for_country">
+                <label for="country">Country</label>
+                <select id="country" name="country">
+                    <option>Select your country</option>
+                    <option>INDIA</option>
+                    <option>PAKISTAN</option>
+                    <option>DUBAI</option>
+                    <option>USA</option>
+                    <option>AUSTRALIA</option>
+                </select>
+            </div>
+
+            <div id="for_check">
+                <label for="newslater">Subscribe to Newsletter</label>
+                <input type="checkbox" name="newslater" id="newslater">
+            </div>
+
+            <div id="for_comments">
+                <textarea id="comments" name="comments" rows="4" placeholder="Enter your comments"></textarea>
+            </div>
+
+            <div id="for_submit">
+                <input type="submit" id="submit" value="Submit">
+            </div>
+        </form>
+        <div id="display"></div>
+    </div>
+
+    
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting the traditional way
+
+            // Get the form data
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const age = document.getElementById('age').value;
+            const gender = document.querySelector('input[name="gender"]:checked')?.value || "Not specified";
+            const country = document.getElementById('country').value;
+            const newslater = document.getElementById('newslater').checked ? "Subscribed" : "Not Subscribed";
+            const comments = document.getElementById('comments').value;
+
+            // Validate the data (optional: add more validations if needed)
+            if (name.length < 3 || name.length > 20) {
+                alert("Name must be between 3 and 20 characters.");
+                return;
+            }
+            if (age < 1 || age > 100) {
+                alert("Age must be between 1 and 100.");
+                return;
+            }
+
+            // Show the form data in the display div
+            const displayDiv = document.getElementById('display');
+            displayDiv.innerHTML = `
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Age:</strong> ${age}</p>
+                <p><strong>Gender:</strong> ${gender}</p>
+                <p><strong>Country:</strong> ${country}</p>
+                <p><strong>Newsletter:</strong> ${newslater}</p>
+                <p><strong>Comments:</strong> ${comments}</p>
+            `;
+            displayDiv.style.display = "block"; // Show the display div
+        });
+    </script>
+</body>
+</html>
